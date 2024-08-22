@@ -4,9 +4,12 @@ import re
 
 from utils.globalf import validate_sql_injection
 
-class UserLogin(BaseModel):
+class UserRegister(BaseModel):
     email: str
     password: str
+    nombre: str
+    username: str
+    user_type_id: int = 1
 
     @validator('password')
     def password_validation(cls, value):
@@ -21,6 +24,20 @@ class UserLogin(BaseModel):
 
         if re.search(r'(012|123|234|345|456|567|678|789|890)', value):
             raise ValueError('Password must not contain a sequence of numbers')
+
+        return value
+
+    @validator('nombre')
+    def name_validation(cls, value):
+        if validate_sql_injection(value):
+            raise ValueError('Invalid name')
+
+        return value
+
+    @validator('username')
+    def name_validation(cls, value):
+        if validate_sql_injection(value):
+            raise ValueError('Invalid name')
 
         return value
 
