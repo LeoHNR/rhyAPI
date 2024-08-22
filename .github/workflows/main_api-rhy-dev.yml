@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://acrrhydev.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_842413a6ea814ed6a792fa652050b824 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_d5f20ec9119d4fafb687beb62164f8c6 }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_65b6b28733484a69825e4d8d30f6bf34 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_0090b148328d49caa11f3851b4aa543f }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: acrrhydev.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_842413a6ea814ed6a792fa652050b824 }}/rhy/api:${{ github.sha }}
+        tags: acrrhydev.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_65b6b28733484a69825e4d8d30f6bf34 }}/rhy/api:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'api-rhy-dev'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_b0936e009b29494c97eeeb2f666bc162 }}
-        images: 'acrrhydev.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_842413a6ea814ed6a792fa652050b824 }}/rhy/api:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_811efc332108483f831a822e3bf104dc }}
+        images: 'acrrhydev.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_65b6b28733484a69825e4d8d30f6bf34 }}/rhy/api:${{ github.sha }}'
